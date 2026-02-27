@@ -1,4 +1,5 @@
-﻿from pieces import Rook, Knight, Bishop, Queen, King, Pawn
+﻿import json
+from pieces import Rook, Knight, Bishop, Queen, King, Pawn
 
 
 class Board:
@@ -43,6 +44,25 @@ class Board:
     def print_board(self):
         rows = [
             [self.squares[f"{chr(col)}{row}"] for col in range(ord('a'), ord('i'))]
+            for row in range(1, 9)
+        ]
+        for row in rows:
+            print(row)
+
+    def save_board(self):
+        with open('board.txt', 'a') as file:
+            file.write(json.dumps(self.squares) + '\n')
+
+    @staticmethod
+    def load_board_states():
+        with open('board.txt', 'r') as file:
+            for line in file:
+                yield json.loads(line)
+
+    @staticmethod
+    def print_saved_state(state: dict):
+        rows = [
+            [state.get(f"{chr(col)}{row}") for col in range(ord('a'), ord('i'))]
             for row in range(1, 9)
         ]
         for row in rows:
