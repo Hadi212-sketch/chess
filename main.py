@@ -1,5 +1,4 @@
-﻿from pieces import Pawn
+﻿from board import Board
 
-pawn = Pawn('BLACK', 1)
-print(pawn)
-pawn.move()
+board = Board()
+board.print_board()
